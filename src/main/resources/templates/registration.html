@@ -55,9 +55,9 @@
 							<i class="fa fa-envelope" aria-hidden="true"></i>
                     </span>
                 </div>
-                <span th:if="${errorUsername!=null}" style="font-family: 'Ubuntu', sans-serif;" th:text="${errorUsername}"/>
+                <span th:if="${errorUsername!=null}" style="font-family: 'Ubuntu', sans-serif;" onchange="alert(this.value)" th:text="${errorUsername}"/>
                 <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-                    <input th:field="*{phoneNumber}" required style="font-family: 'Ubuntu', sans-serif;" class="input100" type="tel" title="Пример: +7771-111-1111" pattern="[+]{1}[0-9]{4}-[0-9]{3}-[0-9]{4}" name="phoneNumber" placeholder="Тел. Номер">
+                    <input th:field="*{phoneNumber}" id="phoneNumber" required style="font-family: 'Ubuntu', sans-serif;" class="phone input100" type="text" title="Пример: +7 (771) 111-1111"  name="phoneNumber" placeholder="Тел. Номер">
                     <span class="focus-input100"></span>
                     <span class="symbol-input100">
 							<i class="fa fa-phone-square" aria-hidden="true"></i>
@@ -72,7 +72,7 @@
                     </span>
                 </div>
                 <div class="wrap-input100 validate-input" data-validate = "Password is required">
-                    <input th:field="*{whatsApp}" required style="font-family: 'Ubuntu', sans-serif;"  class="input100" title="Пример: +7771-111-1111" pattern="[+]{1}[0-9]{4}-[0-9]{3}-[0-9]{4}" type="tel" name="whatsApp" placeholder="WhatsApp Номер">
+                    <input th:field="*{whatsApp}" required style="font-family: 'Ubuntu', sans-serif;"  class="phone input100" title="Пример: +7 (771) 111-1111"  type="tel" name="whatsApp" placeholder="WhatsApp Номер">
                     <span class="focus-input100"></span>
                     <span class="symbol-input100">
 							<i class="fa fa-phone-square" aria-hidden="true"></i>
@@ -129,6 +129,13 @@
 </script>
 <!--===============================================================================================-->
 <script src="/js/main.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/js/jquery.maskedinput.min.js"></script>
 
+<script>
+    $(document).ready(function ($) {
+        $(".phone").mask("+7 (999) 999 9999");
+    });
+</script>
 </body>
 </html>

@@ -62,7 +62,7 @@
               <img width="120px" src="https://inlandfutures.org/wp-content/uploads/2019/12/thumbpreview-grey-avatar-designer.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid mb-4  rounded-circle">
               <a th:href='${"/users/"+trip.user.id}'><h3 class="text-black" th:text='${trip.user.surname+" "+trip.user.name}'/></a>
               <p><a th:href='${"https://wa.me/"+trip.user.getNumber()}' class="btn btn-primary btn-md text-white">Написать</a></p>
-              <p><a th:href='${"tel:"+trip.user.getNumber()}' class="btn btn-success btn-md text-white">Позвонить</a></p>
+              <p><a th:href='${"tel:"+trip.user.getNormalPhoneNumber()}' class="btn btn-success btn-md text-white">Позвонить</a></p>
             </div>
           </div>
         </div>

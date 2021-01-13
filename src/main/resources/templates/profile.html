@@ -52,7 +52,7 @@
                                 <h4 th:text='${user.getSurname()+" "+user.name}'/>
                                 <p class="text-muted font-size-sm" th:text='${user.address}'/>
                                 <a class="m-1" th:href='${"https://wa.me/"+user.getNumber()}'><button class="btn btn-outline-primary">Написать</button></a>
-                                <a class="m-1" th:href='${"tel:"+user.getNumber()}'><button class="btn btn-success">Позвонить</button></a>
+                                <a class="m-1" th:href='${"tel:"+user.getNormalPhoneNumber()}'><button class="btn btn-success">Позвонить</button></a>
                                 <a class="m-1" th:href='${"/users/"+user.id+"/trips"}'><button class="btn btn-danger">Поездки</button></a>
                             </div>
                         </div>

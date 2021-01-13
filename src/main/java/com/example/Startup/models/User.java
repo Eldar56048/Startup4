@@ -146,7 +146,18 @@ public class User implements UserDetails {
     }
 
     public String getNumber(){
-        String[] stringArray = whatsApp.split("-");
+        String[] stringArray = whatsApp.split("[ ()]");
+        String result ="";
+        StringBuffer sb = new StringBuffer();
+        for(int i = 0; i < stringArray.length; i++) {
+            sb.append(stringArray[i]);
+        }
+        result = sb.toString();
+        return result;
+    }
+
+    public String getNormalPhoneNumber(){
+        String[] stringArray = phoneNumber.split("[ ()]");
         String result ="";
         StringBuffer sb = new StringBuffer();
         for(int i = 0; i < stringArray.length; i++) {
