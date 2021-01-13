@@ -112,12 +112,12 @@ public class Trip {
     }
 
     public String getDepartureDateByFormat(){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMMM-yyyy HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMMM-yyyy HH:mm",new Locale("ru"));
         return this.departure.format(formatter);
     }
 
     public String getArrivalDateByFormat(){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMMM-yyyy HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMMM-yyyy HH:mm",new Locale("ru"));
         return this.arrival.format(formatter);
     }
 
