@@ -1,0 +1,35 @@
+<div th:fragment="footer">
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <h2 class="footer-heading mb-4">О нас</h2>
+                    <p>Создан, чтобы разрушить барьеры между городами в передаче товаров. Товары из других городов, село, которые невозможно доставить в Ваш адрес, доступны через путешественников или попутчиков.</p>
+                </div>
+                <div class="col-lg-8 ml-auto">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <h2 class="footer-heading mb-4">Быстрые ссылки</h2>
+                            <ul class="list-unstyled">
+                                <li><a href="/" class="nav-link">О нас</a></li>
+                                <li sec:authorize="!isAuthenticated()"><a href="/login" class="nav-link">Войти</a></li>
+                                <li><a href="/trips" class="nav-link">Поездки</a></li>
+                                <li sec:authorize="isAuthenticated()"><a th:href='${"/users/"+#authentication.principal.id+"/trips"}' class="nav-link">Мои поездки</a></li>
+                                <li sec:authorize="isAuthenticated()"><a th:href='${"/users/"+#authentication.principal.id}' class="nav-link">Профиль</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-6">
+                            <h2 class="footer-heading mb-4">Контакты</h2>
+                            <ul class="list-unstyled">
+                                <li><a href="/login" class="nav-link"><i class="fab fa-instagram-square" aria-hidden="true"></i>Instagram</a></li>
+                                <li><a href="tel:87013406863" class="nav-link"><i class="fa fa-phone-square" aria-hidden="true"></i>+7-(701)-340-6863</a></li>
+                                <li><a href="https://wa.me/+77013406863" class="nav-link"><i class="fab fa-whatsapp-square" aria-hidden="true"></i>WhatsApp</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+</div>

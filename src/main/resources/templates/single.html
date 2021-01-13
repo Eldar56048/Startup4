@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+  <head>
+    <title>Ijoldaý</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" size="16x16" href="/images/logo-orange.png">
+    <link href="https://fonts.googleapis.com/css?family=DM+Sans:300,400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="fonts/icomoon/style.css">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/fonts/flaticon/font/flaticon.css">
+    <link rel="stylesheet" href="/css/aos.css">
+
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+  </head>
+
+  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+
+    
+    <div class="site-wrap" id="home-section">
+
+      <header th:insert="blocks/header :: header"></header>
+
+    <div class="site-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 blog-content">
+            <h2>Откуда:</h2>
+            <p class="lead" th:text="${trip.fromCity}"/>
+            <hr>
+            <h2>Дата Отбытия:</h2>
+            <p class="lead" th:text="${trip.getDepartureDateByFormat()}"/>
+            <hr>
+            <h2>Куда:</h2>
+            <p class="lead" th:text="${trip.whereCity}"/>
+            <hr>
+            <h2>Дата прибытия:</h2>
+            <p class="lead" th:text="${trip.getArrivalDateByFormat()}"/>
+            <hr>
+            <h2>Транспорт:</h2>
+            <p class="lead" th:if='${trip.transport.toString().equals("Plane")}' th:text="Самолет"/>
+            <p class="lead" th:if='${trip.transport.toString().equals("Bus")}' th:text="Автобус"/>
+            <p class="lead" th:if='${trip.transport.toString().equals("Train")}' th:text="Поезд"/>
+            <p class="lead" th:if='${trip.transport.toString().equals("Passenger")}' th:text="Легковой"/>
+            <hr>
+            <h2>Комментарий:</h2>
+            <p class="lead" th:text="${trip.comment}"/>
+            <hr>
+            
+          </div>
+          <div class="col-md-4 sidebar">
+            <div class="sidebar-box  d-flex flex-column justify-content-center align-items-center">
+              <img width="120px" src="https://inlandfutures.org/wp-content/uploads/2019/12/thumbpreview-grey-avatar-designer.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid mb-4  rounded-circle">
+              <a th:href='${"/users/"+trip.user.id}'><h3 class="text-black" th:text='${trip.user.surname+" "+trip.user.name}'/></a>
+              <p><a th:href='${"https://wa.me/"+trip.user.getNumber()}' class="btn btn-primary btn-md text-white">Написать</a></p>
+              <p><a th:href='${"tel:"+trip.user.getNumber()}' class="btn btn-success btn-md text-white">Позвонить</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <footer th:insert="blocks/footer :: footer"></footer>
+
+    </div>
+
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/owl.carousel.min.js"></script>
+    <script src="/js/jquery.sticky.js"></script>
+    <script src="/js/jquery.waypoints.min.js"></script>
+    <script src="/js/jquery.animateNumber.min.js"></script>
+    <script src="/js/jquery.fancybox.min.js"></script>
+    <script src="/js/jquery.easing.1.3.js"></script>
+    <script src="/js/bootstrap-datepicker.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/main.js"></script>
+
+  </body>
+
+</html>
+

@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <title>Ijoldaý - Все Поездки</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap" rel="stylesheet"><!--===============================================================================================-->
+
+    <link href="https://fonts.googleapis.com/css?family=DM+Sans:300,400,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/fonts/icomoon/style.css">
+    <link rel="icon" size="16x16" href="/images/logo-orange.png">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="/css/bootstrap-datepicker.css" th:href="@{/css/bootstrap-datepicker.css}">
+    <link rel="stylesheet" href="/css/jquery.fancybox.min.css" th:href="@{/css/jquery.fancybox.min.css}">
+    <link rel="stylesheet" href="/css/owl.carousel.min.css" th:href="@{/css/owl.carousel.min.css}">
+    <link rel="stylesheet" href="/css/owl.theme.default.min.css" th:href="@{/css/owl.theme.default.min.css}">
+    <link rel="stylesheet" href="/fonts/flaticon/font/flaticon.css" th:href="@{/fonts/flaticon/font/flaticon.css}">
+    <link rel="stylesheet" href="/css/aos.css" th:href="@{/css/aos.css}">
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="/css/style.css" th:href="@{/css/style.css}">
+
+</head>
+
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+
+
+<div class="site-wrap" id="home-section">
+
+    <header th:insert="blocks/header :: header"></header>
+
+        <div class="container">
+            <form th:action="@{/trips/search}" method="get" class="trip-form">
+                <div class="row align-items-center mb-4">
+                    <div class="col-md-6">
+                        <h3 class="m-0">Заполните форму чтобы найти подходящую поездку</h3>
+                    </div>
+                    <div class="col-md-6 text-md-right">
+                        <span class="text-primary" th:text="${available}"/> <span>Поездки доступно</span></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="cf-1"><b>Откуда</b></label>
+                        <input name="from" type="search" id="cf-1" required placeholder="Выберите город" class="form-control">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="cf-2"><b>Куда</b></label>
+                        <input name="to"  type="search" id="cf-2" required placeholder="Выберите город" class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <input type="submit" value="Искать" class="btn btn-primary">
+                    </div>
+                </div>
+            </form>
+            <div class="container" style="text-align: center">
+                <br>
+                <br>
+                <a th:href="@{/trips/add}"><button type="button"  class="btn btn-success" style="color: white; background-color: #F2AA00"><b>Добавить Поездку</b></button></a>
+                <br>
+                <br>
+            </div>
+
+        </div>
+
+    <div class="site-section bg-light">
+        <div th:if="${trips.size()==0}" class="container d-flex flex-column justify-content-center align-items-center">
+            <h3 style="font-family: 'Ubuntu', sans-serif;">Нету подходящих поездок</h3>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div th:each="el:${trips}" class="col-lg-4 col-md-6 mb-4">
+                    <div class="item-1">
+                        <div class="item-1-contents">
+                            <div class="text-center">
+                                <h3><a href="#" th:text='${el.user.surname+" "+el.user.name}'/></h3>
+                            </div>
+                            <ul class="specs">
+                                <li>
+                                    <span>Откуда</span>
+                                    <span class="spec" th:text="${el.fromCity}"/>
+                                </li>
+                                <li>
+                                    <span>Куда</span>
+                                    <span class="spec" th:text="${el.whereCity}"/>
+                                </li>
+                                <li>
+                                    <span>Дата Отбытия</span>
+                                    <span class="spec" th:text="${el.getDepartureDateByFormat()}"/>
+                                </li>
+                                <li>
+                                    <span>Транспорт</span>
+                                    <span class="spec" th:if='${el.transport.toString().equals("Plane")}' th:text="Самолет"/>
+                                    <span class="spec" th:if='${el.transport.toString().equals("Bus")}' th:text="Автобус"/>
+                                    <span class="spec" th:if='${el.transport.toString().equals("Train")}' th:text="Поезд"/>
+                                    <span class="spec" th:if='${el.transport.toString().equals("Passenger")}' th:text="Легковой"/>
+                                </li>
+                                <li>
+                                    <span>Дата Прибытия</span>
+                                    <span class="spec" th:text="${el.getArrivalDateByFormat()}"/>
+                                </li>
+                            </ul>
+                            <div class="d-flex action">
+                                <a th:href='${"/trips/"+el.id}' class="btn btn-primary">Детальнее</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <footer th:insert="blocks/footer :: footer"></footer>
+
+</div>
+
+<script src="/js/jquery-3.3.1.min.js" th:src="@{/js/jquery-3.3.1.min.js}"></script>
+<script src="/js/popper.min.js" th:src="@{/js/popper.min.js}"></script>
+<script src="/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+<script src="/js/owl.carousel.min.js" th:src="@{/js/owl.carousel.min.js}"></script>
+<script src="/js/jquery.sticky.js" th:src="@{/js/jquery.sticky.js}"></script>
+<script src="/js/jquery.waypoints.min.js" th:src="@{/js/jquery.waypoints.min.js}"></script>
+<script src="/js/jquery.animateNumber.min.js" th:src="@{/js/jquery.animateNumber.min.js}"></script>
+<script src="/js/jquery.fancybox.min.js" th:src="@{/js/jquery.fancybox.min.js}"></script>
+<script src="/js/jquery.easing.1.3.js" th:src="@{/js/jquery.easing.1.3.js}"></script>
+<script src="/js/bootstrap-datepicker.min.js" th:src="@{/js/bootstrap-datepicker.min.js}"></script>
+<script src="/js/aos.js" th:src="@{/js/aos.js}"></script>
+
+<script src="/js/main.js" th:src="@{/js/main.js}"></script>
+
+</body>
+
+</html>
+

@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <title>Ijoldaý - Все Поездки</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" size="16x16" href="/images/logo-orange.png">
+    <link href="https://fonts.googleapis.com/css?family=DM+Sans:300,400,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="fonts/icomoon/style.css">
+
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="../static/css/bootstrap-datepicker.css" th:href="@{/css/bootstrap-datepicker.css}">
+    <link rel="stylesheet" href="../static/css/jquery.fancybox.min.css" th:href="@{/css/jquery.fancybox.min.css}">
+    <link rel="stylesheet" href="../static/css/owl.carousel.min.css" th:href="@{/css/owl.carousel.min.css}">
+    <link rel="stylesheet" href="../static/css/owl.theme.default.min.css" th:href="@{/css/owl.theme.default.min.css}">
+    <link rel="stylesheet" href="../static/fonts/flaticon/font/flaticon.css" th:href="@{/fonts/flaticon/font/flaticon.css}">
+    <link rel="stylesheet" href="../static/css/aos.css" th:href="@{/css/aos.css}">
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}">
+
+</head>
+
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+
+
+<div class="site-wrap" id="home-section">
+
+    <header th:insert="blocks/header :: header"></header>
+
+    <div class="container">
+        <form th:object="${trip}" th:action='${"/trips/add"}' method="post" class="trip-form">
+            <div class="row align-items-center mb-4">
+                <div class="col-md-6">
+                    <h3 class="m-0">Добавить поездку</h3>
+                </div>
+            </div>
+            <div class="column">
+                <div class="form-group">
+                    <label for="cf-1"><b>Откуда</b></label>
+                    <input th:field="*{fromCity}" required type="search" id="cf-1" placeholder="Откуда" class="form-control">
+
+                </div>
+                <div class="form-group">
+                    <label for="departure"><b>Дата Отбытия</b></label>
+                    <input th:field="*{departure}" required type="datetime-local" id="departure" onchange="myFunction()" th:min="${trip.getTripNowDate(LocalDateTime)}" placeholder="Your pickup address" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="cf-10"><b>Транспорт</b></label>
+                    <select th:field="*{transport}" id="cf-10" placeholder="Выберите" class="form-control">
+                        <option th:each="el:${transports}" th:if='${el.toString().equals("Plane")}' th:value="${el}" th:text="@{Самолёт}" />
+                        <option th:each="el:${transports}" th:if='${el.toString().equals("Bus")}' th:value="${el}" th:text="@{Автобус}" />
+                        <option th:each="el:${transports}" th:if='${el.toString().equals("Passenger")}' th:value="${el}" th:text="@{Легковой автомобиль}" />
+                        <option th:each="el:${transports}" th:if='${el.toString().equals("Train")}' th:value="${el}" th:text="@{Поезд}" />
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="cf-2"><b>Куда</b></label>
+                    <input th:field="*{whereCity}" required type="search" id="cf-2" placeholder="Куда" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="arrival"><b>Дата Прибытия</b></label>
+                    <input th:field="*{arrival}" required type="datetime-local" id="arrival" placeholder="Your pickup address" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="cf-11"><b>Комментарии</b></label>
+                    <textarea th:field="*{comment}" required type="date" id="cf-11" placeholder="Комментарии" class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <input type="submit" value="Добавить" class="btn btn-primary">
+                </div>
+            </div>
+        </form>
+    </div>
+    <footer th:insert="blocks/footer :: footer"></footer>
+</body>
+<script>
+    function myFunction() {
+        var x = document.getElementById("departure").value;
+        document.getElementById("arrival").min = x;
+    }
+</script>
+</html>
+
